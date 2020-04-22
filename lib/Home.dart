@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:youtube/screens/Inicio.dart';
+import 'package:youtube/screens/Explorar.dart';
+import 'package:youtube/screens/Inscricoes.dart';
+import 'package:youtube/screens/Biblioteca.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -6,8 +10,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  int _indexCurrent = 0;
+
   @override
   Widget build(BuildContext context) {
+
+    List<Widget> screens = [
+      Inicio(),
+      Explorar(),
+      Inscricoes(),
+      Biblioteca()
+    ];
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -40,7 +55,35 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      body: Container(),
+      body: screens[_indexCurrent],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _indexCurrent,
+        onTap: (index) {
+          setState(() {
+            _indexCurrent = index;
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        fixedColor: Colors.red,
+          items: [
+            BottomNavigationBarItem(
+              title: Text("Inínio"),
+              icon: Icon(Icons.home)
+            ),
+            BottomNavigationBarItem(
+                title: Text("Explorar"),
+                icon: Icon(Icons.whatshot)
+            ),
+            BottomNavigationBarItem(
+                title: Text("Inscrições"),
+                icon: Icon(Icons.subscriptions)
+            ),
+            BottomNavigationBarItem(
+                title: Text("Biblioteca"),
+                icon: Icon(Icons.folder)
+            )
+          ]
+      ),
     );
   }
 }
