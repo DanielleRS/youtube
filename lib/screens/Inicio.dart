@@ -4,22 +4,26 @@ import 'package:youtube/model/Video.dart';
 import '../Api.dart';
 
 class Inicio extends StatefulWidget {
+
+  String search;
+  Inicio(this.search);
+
   @override
   _InicioState createState() => _InicioState();
 }
 
 class _InicioState extends State<Inicio> {
 
-  _listVideos() {
+  _listVideos(String search) {
     Api api = Api();
-    return api.search("");
+    return api.search(search);
   }
 
   @override
   Widget build(BuildContext context) {
 
     return FutureBuilder<List<Video>>(
-      future: _listVideos(),
+      future: _listVideos(widget.search),
       builder: (context, snapshot){
         switch(snapshot.connectionState) {
           case ConnectionState.none:
@@ -62,7 +66,7 @@ class _InicioState extends State<Inicio> {
                   itemCount: snapshot.data.length
               );
             } else {
-              Center(
+              return Center(
                 child: Text("Nunhum dado a ser exibido!"),
               );
             }

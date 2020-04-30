@@ -18,7 +18,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
     return IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: (){
-        close(context, null);
+        close(context, "");
       },
     );
   }
@@ -31,7 +31,32 @@ class CustomSearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+
     return Container();
+    /*
+    List<String> lista = List();
+
+    if(query.isNotEmpty) {
+      lista = ["Android", "Android navegação", "IOS", "Jogos"].where(
+          (text) => text.toLowerCase().startsWith(query.toLowerCase())
+      ).toList();
+
+      return ListView.builder(
+          itemCount: lista.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              onTap: (){
+                close(context, lista[index]);
+              },
+              title: Text(lista[index]),
+            );
+          }
+      );
+    } else {
+      return Center(
+        child: Text("Nenhum resultado para a pesquisa!"),
+      );
+    } */
   }
 
 }

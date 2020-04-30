@@ -14,12 +14,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   int _indexCurrent = 0;
+  String _result = "";
 
   @override
   Widget build(BuildContext context) {
 
     List<Widget> screens = [
-      Inicio(),
+      Inicio(_result),
       Explorar(),
       Inscricoes(),
       Biblioteca()
@@ -34,14 +35,17 @@ class _HomeState extends State<Home> {
         title: Image.asset(
             "images/youtube.png",
           width: 98,
-            height: 22,
+          height: 22,
         ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () async {
               String res = await showSearch(context: context, delegate: CustomSearchDelegate());
-              print("resultado: digitado " + res);
+              setState(() {
+                _result = res;
+              });
+              //print("resultado: digitado " + res);
             },
           ),
           /*
