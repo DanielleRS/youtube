@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube/model/Video.dart';
-
+import 'package:flutter_youtube/flutter_youtube.dart';
 import '../Api.dart';
 
 class Inicio extends StatefulWidget {
@@ -41,22 +41,32 @@ class _InicioState extends State<Inicio> {
                     List<Video> videos = snapshot.data;
                     Video video = videos[index];
 
-                    return Column(
-                      children: <Widget>[
-                        Container(
-                          height: 200,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                                image: NetworkImage(video.image)
-                            )
+                    return GestureDetector(
+                      onTap: (){
+                        FlutterYoutube.playYoutubeVideoById(
+                            apiKey: CHAVE_YOUTUBE_API,
+                            videoId: video.id,
+                          autoPlay: true,
+                          fullScreen: true
+                        );
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            height: 200,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(video.image)
+                                )
+                            ),
                           ),
-                        ),
-                        ListTile(
-                          title: Text(video.title),
-                          subtitle: Text(video.channel),
-                        )
-                      ],
+                          ListTile(
+                            title: Text(video.title),
+                            subtitle: Text(video.channel),
+                          )
+                        ],
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) => Divider(
