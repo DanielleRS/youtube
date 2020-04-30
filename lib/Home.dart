@@ -4,6 +4,8 @@ import 'package:youtube/screens/Explorar.dart';
 import 'package:youtube/screens/Inscricoes.dart';
 import 'package:youtube/screens/Biblioteca.dart';
 
+import 'CustomSearchDelegate.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -36,15 +38,17 @@ class _HomeState extends State<Home> {
         ),
         actions: <Widget>[
           IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () async {
+              String res = await showSearch(context: context, delegate: CustomSearchDelegate());
+              print("resultado: digitado " + res);
+            },
+          ),
+          /*
+          IconButton(
             icon: Icon(Icons.videocam),
             onPressed: () {
               print("ação: videocam");
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              print("ação: pesquisa");
             },
           ),
           IconButton(
@@ -52,7 +56,9 @@ class _HomeState extends State<Home> {
             onPressed: () {
               print("ação: conta");
             },
-          )
+          )*/
+
+
         ],
       ),
       body: Container(
