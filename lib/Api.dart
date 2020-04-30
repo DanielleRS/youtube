@@ -16,7 +16,7 @@ class Api {
           "&order=date"
           "&key=$CHAVE_YOUTUBE_API"
           "&channelId=$ID_CANAL"
-          "&Q=$search"
+          "&q=$search"
     );
     if(response.statusCode == 200) {
       Map<String, dynamic> dadosJson = json.decode(response.body);
